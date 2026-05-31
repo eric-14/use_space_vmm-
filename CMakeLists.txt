@@ -27,7 +27,6 @@ endif()
 find_program(CLANG_TIDY_EXE clang-tidy REQUIRED)
 
 if(CLANG_TIDY_EXE)
-  
     add_custom_target(tidy
     COMMAND ${CLANG_TIDY_EXE}
             -checks=-*,readability-*
