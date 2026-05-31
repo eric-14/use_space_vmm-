@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/spartan.dir/main.c.o -o spartan 

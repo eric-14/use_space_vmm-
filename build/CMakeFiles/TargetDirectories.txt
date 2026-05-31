@@ -1,0 +1,5 @@
+/home/eric/Documents/projects/virtual_machine/spartan/build/CMakeFiles/format.dir
+/home/eric/Documents/projects/virtual_machine/spartan/build/CMakeFiles/tidy.dir
+/home/eric/Documents/projects/virtual_machine/spartan/build/CMakeFiles/spartan.dir
+/home/eric/Documents/projects/virtual_machine/spartan/build/CMakeFiles/edit_cache.dir
+/home/eric/Documents/projects/virtual_machine/spartan/build/CMakeFiles/rebuild_cache.dir

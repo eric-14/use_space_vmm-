@@ -14,16 +14,6 @@ check_linux_api_version (struct spartan_errors *error)
     }
   return 1;
 }
-struct spartan_vm_description *
-spartan_kvm_initialize ()
-{
-  struct spartan_vm_description *vm_description
-      = malloc (sizeof (spartan_vm_description));
-  if (vm_description == NULL)
-    perror ("failed to allocate memory for vm description");
-
-  return vm_description;
-}
 
 int
 KVM_START ()

@@ -10,10 +10,19 @@ struct spartan_vm_description
 {
   size_t kvm_fd;
   int KVM_VERSION;
-  struct spartan_errors *
-
+  struct spartan_errors *spartan_errors;
 } spartan_vm_description;
-//
+
+struct spartan_vm_description *
+spartan_kvm_initialize ()
+{
+  struct spartan_vm_description *vm_description
+      = malloc (sizeof (spartan_vm_description));
+  if (vm_description == NULL)
+    perror ("failed to allocate memory for vm description");
+
+  return vm_description;
+}
 
 // mut
 int

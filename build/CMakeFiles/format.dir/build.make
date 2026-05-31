@@ -56,7 +56,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/eric/Documents/projects/virtual_machine/spartan
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/eric/Documents/projects/virtual_machine/spartan
+CMAKE_BINARY_DIR = /home/eric/Documents/projects/virtual_machine/spartan/build
 
 # Utility rule file for format.
 
@@ -67,8 +67,8 @@ include CMakeFiles/format.dir/compiler_depend.make
 include CMakeFiles/format.dir/progress.make
 
 CMakeFiles/format:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/eric/Documents/projects/virtual_machine/spartan/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Running Clang format....."
-	/usr/bin/clang-format -i -style=file /home/eric/Documents/projects/virtual_machine/spartan/CMakeFiles/3.28.3/CompilerIdC/CMakeCCompilerId.c /home/eric/Documents/projects/virtual_machine/spartan/vmm/core\ /Initialization/pre_initialization_checks.c /home/eric/Documents/projects/virtual_machine/spartan/vmm/core\ /Initialization/type_definitions.h
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/eric/Documents/projects/virtual_machine/spartan/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Running Clang format....."
+	/usr/bin/clang-format -i -style=file /home/eric/Documents/projects/virtual_machine/spartan/build/CMakeFiles/3.28.3/CompilerIdC/CMakeCCompilerId.c /home/eric/Documents/projects/virtual_machine/spartan/main.c /home/eric/Documents/projects/virtual_machine/spartan/vmm/core/Initialization/pre_initialization_checks.c /home/eric/Documents/projects/virtual_machine/spartan/vmm/core/Initialization/type_definitions.h
 
 format: CMakeFiles/format
 format: CMakeFiles/format.dir/build.make
@@ -83,6 +83,6 @@ CMakeFiles/format.dir/clean:
 .PHONY : CMakeFiles/format.dir/clean
 
 CMakeFiles/format.dir/depend:
-	cd /home/eric/Documents/projects/virtual_machine/spartan && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/eric/Documents/projects/virtual_machine/spartan /home/eric/Documents/projects/virtual_machine/spartan /home/eric/Documents/projects/virtual_machine/spartan /home/eric/Documents/projects/virtual_machine/spartan /home/eric/Documents/projects/virtual_machine/spartan/CMakeFiles/format.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/eric/Documents/projects/virtual_machine/spartan/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/eric/Documents/projects/virtual_machine/spartan /home/eric/Documents/projects/virtual_machine/spartan /home/eric/Documents/projects/virtual_machine/spartan/build /home/eric/Documents/projects/virtual_machine/spartan/build /home/eric/Documents/projects/virtual_machine/spartan/build/CMakeFiles/format.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/format.dir/depend
 

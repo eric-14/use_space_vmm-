@@ -60,7 +60,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/eric/Documents/projects/virtual_machine/spartan
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/eric/Documents/projects/virtual_machine/spartan
+CMAKE_BINARY_DIR = /home/eric/Documents/projects/virtual_machine/spartan/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eric/Documents/projects/virtual_machine/spartan/CMakeFiles /home/eric/Documents/projects/virtual_machine/spartan//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/eric/Documents/projects/virtual_machine/spartan/build/CMakeFiles /home/eric/Documents/projects/virtual_machine/spartan/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eric/Documents/projects/virtual_machine/spartan/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/eric/Documents/projects/virtual_machine/spartan/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,6 +129,56 @@ format/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/format.dir/build.make CMakeFiles/format.dir/build
 .PHONY : format/fast
 
+#=============================================================================
+# Target rules for targets named tidy
+
+# Build rule for target.
+tidy: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tidy
+.PHONY : tidy
+
+# fast build rule for target.
+tidy/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tidy.dir/build.make CMakeFiles/tidy.dir/build
+.PHONY : tidy/fast
+
+#=============================================================================
+# Target rules for targets named spartan
+
+# Build rule for target.
+spartan: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 spartan
+.PHONY : spartan
+
+# fast build rule for target.
+spartan/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spartan.dir/build.make CMakeFiles/spartan.dir/build
+.PHONY : spartan/fast
+
+main.o: main.c.o
+.PHONY : main.o
+
+# target to build an object file
+main.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spartan.dir/build.make CMakeFiles/spartan.dir/main.c.o
+.PHONY : main.c.o
+
+main.i: main.c.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spartan.dir/build.make CMakeFiles/spartan.dir/main.c.i
+.PHONY : main.c.i
+
+main.s: main.c.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/spartan.dir/build.make CMakeFiles/spartan.dir/main.c.s
+.PHONY : main.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -138,6 +188,11 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... format"
+	@echo "... tidy"
+	@echo "... spartan"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 
