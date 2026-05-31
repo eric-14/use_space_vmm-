@@ -1,10 +1,15 @@
+
+#ifndef SPARTAN_TYPE_DEFINITION
+#define SPARTAN_TYPE_DEFINITION
 #include "type_definitions.h"
+#endif
 
 int
 check_linux_api_version (struct spartan_errors *error)
 {
   // KVM GET API VERSION
   // TODO implement pre-checks of the API using ioctl
+  // import KVM version from config.ini
   int kvm_version = 12;
 
   if (kvm_version != 12)
@@ -16,11 +21,11 @@ check_linux_api_version (struct spartan_errors *error)
 }
 
 int
-KVM_START ()
+spartan_vm_init()
 {
   int kvm_fd = open ("/dev/kvm", O_RDWR | O_CLOEXEC);
-  struct spartan_vm_description *vm = spartan_kvm_initialize ();
-  vm->kvm_fd = kvm_fd;
+  struct spartan_vm_description *spartan_vm = spartan_kvm_initialize ();
+  spartan_vm->kvm_fd = kvm_fd;
 
   return kvm_fd;
 }
@@ -30,16 +35,16 @@ spartan_check_kvm_stability (int kvm)
 {
   int ret = ioctl (kvm, KVM_GET_API_VERSION, NULL);
   if (ret == -1)
-    err (1, 'KVM_GET_API_VERSION');
-  if (ret != 12)
-    errx (1, "KVM_GET_API_VERSION, %d, expected 12", ret);
+    // program will exit. The err is similar to a sys call error
+    err (1, "KVM_GET_API_VERSION");
+  return ret; 
 }
 // check kvms user memory extension
 int
 spartan_check_kvm_user_memory (int kvm)
 {
   int ret = ioctl (kvm, KVM_CHECK_EXTENSION, KVM_CAP_USER_MEMORY);
-  if (ret = -1)
+  if (ret == -1)
     err (1, "KVM_CHECK_EXTENSION");
   if (!ret)
     errx (1, "Required extension KVM_CAP_USER_MEM not available");
@@ -49,6 +54,7 @@ int
 spartan_create_vm (int kvm)
 {
   int vmfd = ioctl (kvm, KVM_CREATE_VM, (unsigned long)0);
+  return vmfd; 
 }
 /*
     TODO: update the function to be more dynamic to different arguments
@@ -59,14 +65,15 @@ spartan_memory_map ()
 {
   int mem = mmap (NULL, 0x1000, PROT_READ | PROT_WRITE,
                   MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+  //exit with error is page allocation fails 
   if (mem == -1)
-    return perr ("Could not allocate memory page for VM");
+    err (1, "Could not allocate memory page for VM");
 
   return mem;
 }
 
 int
-spartan_copy_code_to_run (int vmfd, const uint8_t code[])
+spartan_copy_code_to_run (int vmfd, const uint8_t* code, size_t code_size)
 {
   // create memory page for the VM
   int mem = spartan_memory_map ();
@@ -77,7 +84,21 @@ spartan_copy_code_to_run (int vmfd, const uint8_t code[])
           .guest_phys_addr = 0x1000,
           .memory_size = 0x1000,
           .userspace_addr = (uint64_t)mem };
-  ioctl (vmfd, KVM_SET_USER_MEMORY_REGION, &memory_region);
+
+  int status = ioctl (vmfd, KVM_SET_USER_MEMORY_REGION, &memory_region);
+  if(status == 0)
+  {   // success the system is running
+      return 0; 
+  }else {
+      err(1, "Failed to add memory region to spartan vm"); 
+  }
+}
+
+int 
+spartan_create_vcpu(int vm_fd)
+{
+  // TODO: support multiple vCPUs 
+  int vcpu_fd = ioctl(vm_fd, KVM_CREATE_VCPU, 0);   
 }
 
 int
@@ -128,30 +149,17 @@ spartan_execute_instructions (int vcpufd)
     }
 }
 
-int
-spartan_initialization_test ()
-{
-  const uint8_t code[] = {
-    0xba, 0xf8, 0x03, /*move 0x3f8, %dx */
-    0x00, 0xd8,       /* add %bl, %al*/
-    0x04, '0',        /*add $'0', %al */
-    0x0e,             /*out %al, ((%dx)) */
-    0xb0, '\n',       /* mov $'\n', %al */
-    0xee,             /* out %al, (%dx) */
-    0xf4,             /* hlt */
-  };
-}
+// int
+// spartan_initialization_test ()
+// {
+//   const uint8_t code[] = {
+//     0xba, 0xf8, 0x03, /*move 0x3f8, %dx */
+//     0x00, 0xd8,       /* add %bl, %al*/
+//     0x04, '0',        /*add $'0', %al */
+//     0x0e,             /*out %al, ((%dx)) */
+//     0xb0, '\n',       /* mov $'\n', %al */
+//     0xee,             /* out %al, (%dx) */
+//     0xf4,             /* hlt */
+//   }; 
 
-int
-main ()
-{
-  const uint8_t code[] = {
-    0xba, 0xf8, 0x03, /*move 0x3f8, %dx */
-    0x00, 0xd8,       /* add %bl, %al*/
-    0x04, '0',        /*add $'0', %al */
-    0x0e,             /*out %al, ((%dx)) */
-    0xb0, '\n',       /* mov $'\n', %al */
-    0xee,             /* out %al, (%dx) */
-    0xf4,             /* hlt */
-  };
-}
+// }

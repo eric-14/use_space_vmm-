@@ -1,10 +1,14 @@
 #include <asm/kvm.h>
+#include <err.h>
 #include <fcntl.h>
-#include <linux/errno.h>
-#include <linux/kvm.h>
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <sys/mman.h>
+
+#include <linux/errno.h>
+#include <linux/kvm.h>
+#include <sys/ioctl.h>
 
 struct spartan_vm_description
 {

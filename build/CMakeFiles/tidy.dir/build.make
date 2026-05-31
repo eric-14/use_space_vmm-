@@ -68,7 +68,7 @@ include CMakeFiles/tidy.dir/progress.make
 
 CMakeFiles/tidy:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/eric/Documents/projects/virtual_machine/spartan/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Running clang tidy on spartan"
-	/usr/bin/clang-tidy -checks=-*,readability-* /home/eric/Documents/projects/virtual_machine/spartan/build/CMakeFiles/3.28.3/CompilerIdC/CMakeCCompilerId.c /home/eric/Documents/projects/virtual_machine/spartan/main.c /home/eric/Documents/projects/virtual_machine/spartan/vmm/core/Initialization/pre_initialization_checks.c /home/eric/Documents/projects/virtual_machine/spartan/vmm/core/Initialization/type_definitions.h -- -I/home/eric/Documents/projects/virtual_machine/spartan
+	/usr/bin/clang-tidy -checks=-*,readability-* /home/eric/Documents/projects/virtual_machine/spartan/build/CMakeFiles/3.28.3/CompilerIdC/CMakeCCompilerId.c /home/eric/Documents/projects/virtual_machine/spartan/main.c /home/eric/Documents/projects/virtual_machine/spartan/vmm/core/Initialization/pre_initialization.h /home/eric/Documents/projects/virtual_machine/spartan/vmm/core/Initialization/pre_initialization_checks.c /home/eric/Documents/projects/virtual_machine/spartan/vmm/core/Initialization/type_definitions.h -- -I/home/eric/Documents/projects/virtual_machine/spartan
 
 tidy: CMakeFiles/tidy
 tidy: CMakeFiles/tidy.dir/build.make
