@@ -24,6 +24,11 @@ The system emulates the vCPU and memory allocation.
 
 For PCI base devices and MMIO device rust VMM is utilized to implement virtualized. 
 
+# Running microVM 
+1. Clone the project 
+
+**The rest will be added when the project becomes stable **
+
 
 # Contribution 
 
